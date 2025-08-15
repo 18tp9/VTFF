@@ -4,7 +4,7 @@ from PIL import Image
 from scipy.ndimage import median_filter
 import os
 import tkinter as tk
-from tkinter import simpledialog, filedialog
+from tkinter import simpledialog, filedialog, ttk
 
 class BGDialog(simpledialog.Dialog):
     def __init__(self, parent, imgPath, filenames, title=None):
@@ -63,6 +63,36 @@ def backgroundSubtract(path, bg):
     im = np.asarray(im)
     im1 = bg - im
     return im, im1
+
+
+
+
+# --- Intro/Splash Window ---
+intro_window = tk.Tk()
+intro_window.title("Welcome")
+intro_window.geometry("400x250")
+intro_window.configure(bg="#3bafe6")
+
+# Title
+title_label = tk.Label(intro_window, text="VTFF", font=("Helvetica", 18, "bold"), bg="#9dd1e9")
+title_label.pack(pady=20)
+
+# Message
+message_label = tk.Label(
+    intro_window,
+    text="Welcome to the visual tracer filter finder!\nClick 'Start' to continue.",
+    font=("Helvetica", 12),
+    bg="#e6cda1"
+)
+message_label.pack(pady=10)
+
+# Start Button
+start_button = ttk.Button(intro_window, text="Start", command=intro_window.destroy)
+start_button.pack(pady=20)
+
+# Run splash
+intro_window.mainloop()
+
 
 root = tk.Tk()
 root.withdraw()
